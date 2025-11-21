@@ -7,6 +7,9 @@ on:
     branches: [ "master", "main" ]
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -46,3 +49,21 @@ jobs:
         with:
           name: ferrumc-dashboard
           path: dist/dashboard.min.html
+
+      - name: Update Nightly Tag
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && github.event_name == 'push'
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git tag -f nightly
+          git push origin nightly -f
+
+      - name: Update Nightly Release
+        if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && github.event_name == 'push'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: nightly
+          name: Nightly Build
+          files: dist/dashboard.min.html
+          prerelease: true
+          make_latest: true
