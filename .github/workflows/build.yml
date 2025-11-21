@@ -50,20 +50,20 @@ jobs:
           name: ferrumc-dashboard
           path: dist/dashboard.min.html
 
-      - name: Update Release Tag
+      - name: Update Nightly Tag
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && github.event_name == 'push'
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
-          git tag -f release
-          git push origin release -f
+          git tag -f nightly
+          git push origin nightly -f
 
-      - name: Update "Release" Release
+      - name: Update Nightly Release
         if: (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main') && github.event_name == 'push'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: release
-          name: Release Build
+          tag_name: nightly
+          name: Nightly Build
           files: dist/dashboard.min.html
           prerelease: true
           make_latest: true
