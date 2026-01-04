@@ -6,6 +6,11 @@
 import { browser } from "$app/environment";
 import { page } from "$app/state";
 
+export interface TpsDataPoint {
+	time: Date;
+	tps: number;
+}
+
 export interface TelemetryData {
 	status: string;
 	ramUsage: number;
@@ -14,6 +19,8 @@ export interface TelemetryData {
 	uptime: number;
 	onlinePlayers: number;
 	maxPlayers: number;
+	tps: number;
+	tpsHistory: TpsDataPoint[];
 }
 
 let preferredWsPort: string | null = null;
@@ -39,9 +46,30 @@ function createTelemetryStore() {
 			cpuUsage: 0,
 			uptime: 0,
 			onlinePlayers: 0,
-			maxPlayers: 100
+			maxPlayers: 100,
+			tps: 20,
+			tpsHistory: []
 		}
 	});
+
+	// Initialize TPS history with demo data when not connected
+	function initializeDemoTpsHistory() {
+		const now = Date.now();
+		const demoData: TpsDataPoint[] = [];
+		const tpsValues = [20, 20, 19.8, 20, 20, 19.5, 18.2, 19.0, 20, 20, 20, 19.9, 20, 20, 20];
+		
+		for (let i = 0; i < tpsValues.length; i++) {
+			demoData.push({
+				time: new Date(now - (tpsValues.length - 1 - i) * 60000), // 1 minute intervals going back
+				tps: tpsValues[i]
+			});
+		}
+		
+		state.data.tpsHistory = demoData;
+	}
+
+	// Initialize demo data on creation
+	initializeDemoTpsHistory();
 
 	function connect() {
 		if (typeof window === 'undefined') return;
@@ -90,6 +118,7 @@ function createTelemetryStore() {
 		uptime?: number;
 		online_players?: number;
 		max_players?: number;
+		tps?: number;
 	}) {
 		if (data.ram_usage !== undefined) {
 			state.data.ramUsage = data.ram_usage;
@@ -108,6 +137,14 @@ function createTelemetryStore() {
 		}
 		if (data.max_players !== undefined) {
 			state.data.maxPlayers = data.max_players;
+		}
+		if (data.tps !== undefined) {
+			state.data.tps = data.tps;
+			// Add to history, keep last 60 data points (1 hour at 1 per minute)
+			state.data.tpsHistory = [
+				...state.data.tpsHistory.slice(-59),
+				{ time: new Date(), tps: data.tps }
+			];
 		}
 	}
 

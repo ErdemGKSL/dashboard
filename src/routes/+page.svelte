@@ -9,6 +9,18 @@
 	import { telemetry } from '$lib/stores/telemetry.svelte.js';
 	import { formatBytes } from '$lib/utils/format.js';
 	import { Button } from '$lib/components/ui/button/index.js';
+	import * as Chart from '$lib/components/ui/chart/index.js';
+	import { AreaChart, Area, LinearGradient } from 'layerchart';
+	import { scaleUtc } from 'd3-scale';
+	import { curveNatural } from 'd3-shape';
+
+	// Chart config for TPS
+	const chartConfig = {
+		tps: {
+			label: 'TPS',
+			color: '#10b981' // emerald-500 / success color
+		}
+	} satisfies Chart.ChartConfig;
 
 	// Derived values
 	const ramFormatted = $derived(formatBytes(telemetry.data.ramUsage));
@@ -24,6 +36,9 @@
 			? (telemetry.data.onlinePlayers / telemetry.data.maxPlayers) * 100 
 			: 0
 	);
+
+	// TPS chart data
+	const tpsData = $derived(telemetry.data.tpsHistory);
 </script>
 
 <svelte:head>
@@ -103,7 +118,7 @@
 
 	<!-- Main Chart Section -->
 	<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-		<!-- TPS Chart Placeholder -->
+		<!-- TPS Chart -->
 		<div class="lg:col-span-2 glass rounded-2xl p-6 border border-border">
 			<div class="flex items-center justify-between mb-6">
 				<div>
@@ -116,9 +131,58 @@
 					<Button variant="ghost" size="sm" class="text-xs text-muted-foreground">24H</Button>
 				</div>
 			</div>
-			<div class="w-full h-87.5 flex items-center justify-center text-muted-foreground">
-				<p>TPS Chart - Connect to server for live data</p>
-			</div>
+			<Chart.Container config={chartConfig} class="h-87.5 w-full">
+				<AreaChart
+					data={tpsData}
+					x="time"
+					xScale={scaleUtc()}
+					yDomain={[0, 22]}
+					series={[
+						{
+							key: 'tps',
+							label: 'TPS',
+							color: chartConfig.tps.color
+						}
+					]}
+					props={{
+						area: {
+							curve: curveNatural,
+							'fill-opacity': 0.4,
+							line: { class: 'stroke-2' },
+							motion: 'tween'
+						},
+						xAxis: {
+							format: (v: Date) => v.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' }),
+							ticks: 5
+						},
+						yAxis: {
+							ticks: [0, 5, 10, 15, 20]
+						}
+					}}
+				>
+					{#snippet marks({ series, getAreaProps })}
+						{#each series as s, i (s.key)}
+							<LinearGradient
+								stops={[
+									s.color ?? '',
+									'color-mix(in lch, ' + s.color + ' 10%, transparent)'
+								]}
+								vertical
+							>
+								{#snippet children({ gradient }: { gradient: string })}
+									<Area {...getAreaProps(s, i)} fill={gradient} />
+								{/snippet}
+							</LinearGradient>
+						{/each}
+					{/snippet}
+					{#snippet tooltip()}
+						<Chart.Tooltip
+							labelFormatter={(v: Date) => v.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}
+							hideLabel={false}
+						/>
+					{/snippet}
+				</AreaChart>
+			</Chart.Container>
 		</div>
 
 		<!-- Resource Distribution -->
