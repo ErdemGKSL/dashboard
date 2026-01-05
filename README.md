@@ -9,6 +9,9 @@
 </a>
 </div>
 
+> [!IMPORTANT]
+> **Built-in Experience:** This dashboard is already compiled into the [FerrumC](https://github.com/ferrumc-rs/ferrumc) binary by default. You do not need to clone or build this repository to use the dashboard. This repo exists for development, contributions, and for those who want to explore the SvelteKit-based UI implementation.
+
 ## 📖 About FerrumC Dashboard
 
 **FerrumC** is a high-performance Minecraft server implementation written from the ground up in Rust. This repository
