@@ -14,6 +14,7 @@
 ---
 
 ### ⚡ Integrated by Default
+
 > [!IMPORTANT]
 > **No installation needed.** This dashboard is natively served by the [FerrumC](https://github.com/ferrumc-rs/ferrumc) Rust binary. This repo is only for UI development and contribution.
 
@@ -31,18 +32,9 @@
 ## 🖼️ Gallery
 
 <div align="center">
-  <table border="0">
-    <tr style="border: none;">
-      <td width="79%" align="center" style="border: none; vertical-align: bottom;">
-        <p><b>Desktop Interface</b></p>
-        <img src="https://github.com/ferrumc-rs/dashboard/blob/master/assets/README/FerrumC%20Dashboard.png?raw=true" width="100%" style="border-radius: 10px;" alt="FerrumC Desktop Dashboard">
-      </td>
-      <td width="21%" align="center" style="border: none; vertical-align: bottom;">
-        <p><b>Mobile</b></p>
-        <img src="https://github.com/ferrumc-rs/dashboard/blob/master/assets/README/FerrumC%20Dashboard%20Mobile.png?raw=true" width="100%" style="border-radius: 10px;" alt="FerrumC Mobile Dashboard">
-      </td>
-    </tr>
-  </table>
+  <img src="https://github.com/ferrumc-rs/dashboard/blob/master/assets/README/FerrumC%20Dashboard.png?raw=true" height="350" alt="Desktop View">&nbsp;<img src="https://github.com/ferrumc-rs/dashboard/blob/master/assets/README/FerrumC%20Dashboard%20Mobile.png?raw=true" height="350" alt="Mobile View">
+  <br>
+  <sub><i>Desktop and Mobile interfaces synced via WebSockets.</i></sub>
 </div>
 
 ---
@@ -62,22 +54,23 @@ pnpm dev
 pnpm build
 ```
 
-[!TIP]
+---
 
-To link to a specific instance: localhost:5173/?ws_port=9000
+> [!TIP]
+> **Custom Instance:** To link the dashboard to a specific server, append the port to the URL:
+> `localhost:5173/?ws_port=9000`
 
-🔄 Automated Workflow
+---
 
-Commit: Push changes to master.
+## 🔄 Automated Workflow
 
-CI/CD: GitHub Actions bundles the SvelteKit app.
+1. **Push:** Changes committed to the `master` branch.
+2. **Build:** GitHub Actions automatically bundles the SvelteKit application.
+3. **Release:** Build artifacts are packaged and uploaded to **GitHub Releases**.
+4. **Sync:** The FerrumC binary fetches the latest UI assets to serve them natively.
 
-Deploy: Artifacts are uploaded to Releases.
-
-Sync: FerrumC binary automatically fetches and serves the latest UI.
+---
 
 <p align="center">
-
-Built with ❤️ by the <b>FerrumC Team</b> • <a href="https://discord.gg/qT5J8EMjwk">Join Discord</a>
-
+  Built with ❤️ by the <b>FerrumC Team</b> • <a href="https://discord.gg/qT5J8EMjwk">Join Discord</a>
 </p>
