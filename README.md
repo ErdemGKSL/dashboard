@@ -1,120 +1,83 @@
-<img style="width: 100%" src="https://github.com/ferrumc-rs/ferrumc/blob/master/assets/README/header.svg?raw=true" alt="FerrumC Header">
+<p align="center">
+  <img src="https://github.com/ferrumc-rs/ferrumc/blob/master/assets/README/header.svg?raw=true" alt="FerrumC Header" width="100%">
+</p>
 
-<div align="center">
-<img src="https://img.shields.io/github/license/ferrumc-rs/ferrumc?style=for-the-badge&color=red" alt="License">
-<img src="https://img.shields.io/github/languages/code-size/ferrumc-rs/dashboard?style=for-the-badge&color=red" alt="Code Size">
-<img src="https://img.shields.io/badge/Sveltekit-FF3E00?style=for-the-badge&color=red" alt="SvelteKit">
-<a href="https://discord.gg/qT5J8EMjwk">
-<img alt="Discord" src="https://img.shields.io/discord/1277314213878173726?style=for-the-badge&logo=discord&logoColor=red&color=red">
-</a>
-</div>
+<p align="center">
+  <img src="https://img.shields.io/github/license/ferrumc-rs/ferrumc?style=for-the-badge&color=red" alt="License">
+  <img src="https://img.shields.io/github/languages/code-size/ferrumc-rs/dashboard?style=for-the-badge&color=red" alt="Code Size">
+  <img src="https://img.shields.io/badge/Sveltekit-FF3E00?style=for-the-badge&color=red" alt="SvelteKit">
+  <a href="https://discord.gg/qT5J8EMjwk">
+    <img src="https://img.shields.io/discord/1277314213878173726?style=for-the-badge&logo=discord&logoColor=red&color=red" alt="Discord">
+  </a>
+</p>
 
+---
+
+### ⚡ Integrated by Default
 > [!IMPORTANT]
-> **Built-in Experience:** This dashboard is already compiled into the [FerrumC](https://github.com/ferrumc-rs/ferrumc) binary by default. You do not need to clone or build this repository to use the dashboard. This repo exists for development, contributions, and for those who want to explore the SvelteKit-based UI implementation.
-
-## 📖 About FerrumC Dashboard
-
-**FerrumC** is a high-performance Minecraft server implementation written from the ground up in Rust. This repository
-contains the **Official Web Dashboard**, a modern management interface built with **SvelteKit**.
-
-### 🔌 Real-time Communication
-
-The dashboard utilizes **WebSockets** to establish a persistent, bi-directional connection with the FerrumC binary. This
-allows for:
-
-* **Live Monitoring:** Receive real-time server stats, logs, and player data instantly.
-* **Remote Actions:** Send commands, manage configurations, and trigger server actions directly from the browser.
-
-### 🛠️ Integration Workflow
-
-* **Auto-Generated:** Built using SvelteKit and bundled via GitHub Actions.
-* **Auto-Uploaded:** Every successful build is automatically uploaded to GitHub Releases as a zip artifact.
-* **Native Serving:** The main FerrumC Rust binary fetches these release assets to serve the dashboard directly to users
-  without requiring a separate web server setup.
+> **No installation needed.** This dashboard is natively served by the [FerrumC](https://github.com/ferrumc-rs/ferrumc) Rust binary. This repo is only for UI development and contribution.
 
 ---
 
-## 🖼️ Screenshots
+## ✨ Features
+
+- 🛰️ **Real-time:** Persistent bi-directional WebSocket connection.
+- 📊 **Live Stats:** Instant server metrics, logs, and player counts.
+- 🎮 **Remote Console:** Full command execution from your browser.
+- 📱 **Responsive:** Fully optimized for Mobile and Desktop management.
+
+---
+
+## 🖼️ Gallery
 
 <div align="center">
-<h4>Desktop Dashboard</h4>
-<img src="https://github.com/ferrumc-rs/dashboard/blob/master/assets/README/FerrumC%20Dashboard.png?raw=true" alt="FerrumC Dashboard Desktop" width="800">
-
-<h4>Mobile Experience</h4>
-<img src="https://github.com/ferrumc-rs/dashboard/blob/master/assets/README/FerrumC%20Dashboard%20Mobile.png?raw=true" alt="FerrumC Dashboard Mobile" height="450">
+  <table border="0">
+    <tr style="border: none;">
+      <td width="79%" align="center" style="border: none; vertical-align: bottom;">
+        <p><b>Desktop Interface</b></p>
+        <img src="https://github.com/ferrumc-rs/dashboard/blob/master/assets/README/FerrumC%20Dashboard.png?raw=true" width="100%" style="border-radius: 10px;" alt="FerrumC Desktop Dashboard">
+      </td>
+      <td width="21%" align="center" style="border: none; vertical-align: bottom;">
+        <p><b>Mobile</b></p>
+        <img src="https://github.com/ferrumc-rs/dashboard/blob/master/assets/README/FerrumC%20Dashboard%20Mobile.png?raw=true" width="100%" style="border-radius: 10px;" alt="FerrumC Mobile Dashboard">
+      </td>
+    </tr>
+  </table>
 </div>
 
 ---
 
-## 🚀 Getting Started
+## 🛠️ Developer Quickstart
 
-### Prerequisites
-
-* [Node.js](https://nodejs.org/) (Latest LTS recommended)
-* **pnpm** (preferred package manager)
+If you want to contribute to the UI or run a custom dev environment:
 
 ```bash
-npm i -g pnpm
-```
-
-### Development Server
-
-1. **Install dependencies:**
-
-```bash
+# 1. Setup
 pnpm i
-```
 
-2. **Start the dev server:**
-
-```bash
+# 2. Run Dev (Connects to local FerrumC)
 pnpm dev
-```
 
-> [!TIP]
-> To connect the dashboard to a running FerrumC instance, specify the WebSocket port via the URL query string:
-`?ws_port=9000`
-
----
-
-## 📦 Building
-
-### Building Notes
-
-* **CI/CD Driven:** You do not need to produce a single bundled application manually for release; our CI workflow
-  handles the bundling and release process.
-* **Seamless Updates:** FerrumC fetches the latest release zip. If you push a new build, re-compiling or re-running the
-  main FerrumC binary will trigger the dashboard update automatically.
-
-### How to Build Locally
-
-1. **Install dependencies:**
-
-```bash
-pnpm i
-```
-
-2. **Build the project:**
-
-```bash
+# 3. Build (Outputs to ./build)
 pnpm build
 ```
 
-*The build output will be placed in the `./build` directory.*
+[!TIP]
 
----
+To link to a specific instance: localhost:5173/?ws_port=9000
 
-## 🛠️ Development & Contributions
+🔄 Automated Workflow
 
-We welcome contributions to make the FerrumC management experience even better!
+Commit: Push changes to master.
 
-1. Fork the repository.
-2. Create a feature branch.
-3. Submit a pull request.
+CI/CD: GitHub Actions bundles the SvelteKit app.
 
-Join our **[Discord Community](https://discord.gg/qT5J8EMjwk)** to discuss features or get help with the setup.
+Deploy: Artifacts are uploaded to Releases.
 
-## 📜 License
+Sync: FerrumC binary automatically fetches and serves the latest UI.
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ferrumc-rs/ferrumc/blob/master/LICENSE) file for
-details.
+<p align="center">
+
+Built with ❤️ by the <b>FerrumC Team</b> • <a href="https://discord.gg/qT5J8EMjwk">Join Discord</a>
+
+</p>
