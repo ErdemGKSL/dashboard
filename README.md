@@ -2,7 +2,7 @@
 
 <div align="center">
 <img src="https://img.shields.io/github/license/ferrumc-rs/ferrumc?style=for-the-badge&color=red" alt="License">
-<img src="https://img.shields.io/github/languages/code-size/ferrumc-rs/ferrumc?style=for-the-badge&color=red" alt="Code Size">
+<img src="https://img.shields.io/github/languages/code-size/ferrumc-rs/dashboard?style=for-the-badge&color=red" alt="Code Size">
 <img src="https://img.shields.io/badge/Sveltekit-FF3E00?style=for-the-badge&color=red" alt="SvelteKit">
 <a href="https://discord.gg/qT5J8EMjwk">
 <img alt="Discord" src="https://img.shields.io/discord/1277314213878173726?style=for-the-badge&logo=discord&logoColor=red&color=red">
