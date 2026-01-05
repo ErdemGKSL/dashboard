@@ -1,4 +1,4 @@
-# Development
+# FerruMC Dashboard
 
 ## Prerequisites
 
