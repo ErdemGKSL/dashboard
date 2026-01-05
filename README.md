@@ -116,5 +116,5 @@ Join our **[Discord Community](https://discord.gg/qT5J8EMjwk)** to discuss featu
 
 ## 📜 License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://www.google.com/search?q=LICENSE) file for
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/ferrumc-rs/ferrumc/blob/master/LICENSE) file for
 details.
